@@ -5,6 +5,8 @@ This script obtain all the projects and compute instances within those projects 
 
 ## Getting Started
 Make sure node and gcloud is installed on your system
+[gcloud](https://cloud.google.com/sdk/docs/install)
+[node](https://nodejs.org/en/download/)
 #### 1. Clone the repository and navigate to the directory
 ```shell
 git clone https://github.com/sadasystems/gcp-compute-tool.git
