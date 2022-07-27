@@ -1,13 +1,13 @@
 {
   "name": "gcp-compute",
   "version": "1.0.0",
-  "description": "",
+  "description": "Export GCP Compute Usage to CSV",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Julius Oh",
   "license": "ISC",
   "dependencies": {
     "export-to-csv": "^0.2.1"
