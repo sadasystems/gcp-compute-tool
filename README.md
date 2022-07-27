@@ -8,13 +8,17 @@ Make sure node and gcloud is installed on your system
 git clone https://github.com/sadasystems/gcp-compute-tool.git
 cd gcp-compute-tool
 ```
+#### 2. Authenticate yourself with Google
+```
+gcloud auth login
+```
 
-#### 2. Install all dependencies 
+#### 3. Install all dependencies 
 ```shell
 npm install
 ```
 
-#### 3. Run Script
+#### 4. Run Script
 ```shell
 node main.js
 ```
