@@ -9,6 +9,9 @@ Make sure node and gcloud is installed on your system
 gcloud - [https://cloud.google.com/sdk/docs/install](https://cloud.google.com/sdk/docs/install)
 
 nodejs - [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+
+Make sure the USER running this script has sufficient permissions at the organization level to search all assets, enable compute instance etc.
+
 #### 1. Clone the repository and navigate to the directory
 ```shell
 git clone https://github.com/sadasystems/gcp-compute-tool.git
