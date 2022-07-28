@@ -23,9 +23,9 @@ Make sure this user has sufficient permissions at YOUR ORGANIZATION level IAM
 gcloud auth login
 ```
 
-#### 3. Install all dependencies 
+#### 3. Install all dependencies with clean install
 ```shell
-npm install
+npm ci
 ```
 
 #### 4. Run Script
