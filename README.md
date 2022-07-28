@@ -18,6 +18,7 @@ git clone https://github.com/sadasystems/gcp-compute-tool.git
 cd gcp-compute-tool
 ```
 #### 2. Authenticate yourself with Google
+Make sure this user has sufficient permissions at YOUR ORGANIZATION level IAM
 ```shell
 gcloud auth login
 ```
