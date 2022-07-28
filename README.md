@@ -1,7 +1,7 @@
 # GCP Compute List Export Tool
 Export your current compute instances to a CSV format in local directory
 
-This script obtain all the projects and compute instances within those projects and export this data to a .csv format in the same directory 
+This script will extract all the projects and compute instances within those projects and export this data to a .csv format in the same directory 
 
 ## Getting Started
 Make sure node and gcloud is installed on your system
