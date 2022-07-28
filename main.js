@@ -8,7 +8,7 @@ import fetch from "node-fetch";
 
 dotenv.config();
 
-let projects = ["geolocator-349807"];
+let projects = [];
 async function checkForProject() {
   try {
     const cloudAssets = new shell_cmd();
@@ -28,7 +28,7 @@ async function checkForProject() {
   }
 }
 
-// await checkForProject();
+await checkForProject();
 
 let finalData = [];
 async function getComputeList() {

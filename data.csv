@@ -1,0 +1,8 @@
+﻿List of Compute Instances
+
+project,name,machineType,status,zone,diskSizeGb,diskType,cpu,memory
+"geolocator-349807","instance-1","e2-medium","RUNNING","us-central1-a",10,PERSISTENT,"1","4"
+"geolocator-349807","instance-2","e2-medium","RUNNING","us-central1-a",10,PERSISTENT,"1","4"
+"geolocator-349807","instance-3","e2-medium","RUNNING","us-central1-a",10,PERSISTENT,"1","4"
+"geolocator-349807","instance-4","e2-medium","RUNNING","us-central1-a",10,PERSISTENT,"1","4"
+"geolocator-349807","instance-5","e2-medium","RUNNING","us-central1-a",10,PERSISTENT,"1","4"
