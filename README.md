@@ -15,7 +15,7 @@ git clone https://github.com/sadasystems/gcp-compute-tool.git
 cd gcp-compute-tool
 ```
 #### 2. Authenticate yourself with Google
-```
+```shell
 gcloud auth login
 ```
 
@@ -25,6 +25,11 @@ npm install
 ```
 
 #### 4. Run Script
+```shell
+In the .env file, enter the ORGANIZATION ID that you want to do analysis on.
+```
+
+#### 5. Run Script
 ```shell
 node main.js
 ```
