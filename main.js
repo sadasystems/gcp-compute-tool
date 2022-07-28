@@ -3,7 +3,6 @@ import { ExportToCsv } from "export-to-csv";
 import fs from "fs";
 import _ from "lodash";
 import dotenv from "dotenv";
-import cheerio from "cheerio";
 import fetch from "node-fetch";
 
 dotenv.config();
