@@ -32,7 +32,7 @@ npm ci
 
 #### 4. Run Script
 ```shell
-In the .env file, enter the ORGANIZATION ID that you want to do analysis on.
+In the .env file, enter the ORGANIZATION ID and BILLING ACCOUNT ID 
 ```
 
 #### 5. Run Script
