@@ -19,13 +19,15 @@ cd gcp-compute-tool
 ```
 #### 2. Authenticate yourself with Google
 Make sure this user has sufficient permissions at YOUR ORGANIZATION level IAM
+After gcloud init, make sure you select project in the same as the organization
 ```shell
-gcloud auth login
+gcloud default application login 
+gcloud init
 ```
 
-#### 3. Install all dependencies 
+#### 3. Install all dependencies with clean install
 ```shell
-npm install
+npm ci
 ```
 
 #### 4. Run Script
@@ -36,4 +38,11 @@ In the .env file, enter the ORGANIZATION ID that you want to do analysis on.
 #### 5. Run Script
 ```shell
 node main.js
+```
+
+To Migrate projects to billing account 
+
+#### 6. Migrate projects to sada billing account
+```shell
+node migrateProjectsToSada.js
 ```
