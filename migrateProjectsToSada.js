@@ -14,11 +14,12 @@ async function checkForProject() {
     await cloudAssets.execCommand(`gcloud services enable cloudasset.googleapis.com`);
     const start = new shell_cmd();
     const result = await start.execCommand(
-      `gcloud asset search-all-resources --asset-types="cloudresourcemanager.googleapis.com/Project" --scope=organizations/${process.env.ORG_ID} --format=json`
+      `gcloud beta billing projects list --billing-account=${process.env.OLD_BILLING_ACCOUNT_ID} --format=json`
     );
     const data = JSON.parse(result);
+    console.log(data)
     data.forEach((project) => {
-      projects.push(project.additionalAttributes.projectId);
+      projects.push(project.projectId);
     });
     console.log(projects);
   } catch (error) {
@@ -37,7 +38,7 @@ async function migrateProjects() {
         await config.execCommand(`gcloud config set project ${project}`);
         const start = new shell_cmd();
         const result = await start.execCommand(
-          `gcloud beta billing projects link ${project} --billing-account=${process.env.BILLING_ACCOUNT}`
+          `gcloud beta billing projects link ${project} --billing-account=${process.env.SADA_BILLING_ACCOUNT_ID}`
         );
         console.log('billing moved', result);
       })
