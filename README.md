@@ -32,7 +32,7 @@ npm ci
 
 #### 4. Run Script
 ```shell
-In the .env file, enter the ORGANIZATION ID and BILLING ACCOUNT ID 
+In the .env file, enter the ORGANIZATION ID and BILLING ACCOUNT ID (Only if you are going to migrate projects to sada billing account) 
 ```
 
 #### 5. Run Script
