@@ -1,4 +1,4 @@
-# GCP Compute List Export Tool
+# GCP Compute List Export Tool and migrate to sada billing account id
 Export your current compute instances to a CSV format in local directory
 
 This script will extract all the projects and compute instances within those projects and export this data to a .csv format in the same directory 
@@ -27,12 +27,12 @@ gcloud init
 
 #### 3. Install all dependencies with clean install
 ```shell
-npm ci
+npm install
 ```
 
 #### 4. Run Script
 ```shell
-In the .env file, enter the ORGANIZATION ID that you want to do analysis on.
+In the .env file, enter the ORGANIZATION ID and BILLING ACCOUNT ID (Only if you are going to migrate projects to sada billing account) 
 ```
 
 #### 5. Run Script
