@@ -27,7 +27,7 @@ gcloud init
 
 #### 3. Install all dependencies with clean install
 ```shell
-npm ci
+npm install
 ```
 
 #### 4. Run Script
