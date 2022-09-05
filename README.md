@@ -18,9 +18,11 @@ git clone https://github.com/sadasystems/gcp-compute-tool.git
 cd gcp-compute-tool
 ```
 #### 2. Authenticate yourself with Google
+Install gcloud beta
 Make sure this user has sufficient permissions at YOUR ORGANIZATION level IAM
 After gcloud init, make sure you select project in the same as the organization
 ```shell
+gcloud components install beta --quiet
 gcloud default application login 
 gcloud init
 ```
