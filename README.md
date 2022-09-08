@@ -34,7 +34,7 @@ npm install
 
 #### 4. Run Script
 ```shell
-In the .env file, enter the ORGANIZATION ID and BILLING ACCOUNT ID (Only if you are going to migrate projects to sada billing account) 
+In the .env file, enter the SADA_BILLING_ACCOUNT_ID and (OLD_BILLING_ACCOUNT_ID , if migrating to SADA)
 ```
 
 #### 5. Run Script
