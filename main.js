@@ -14,11 +14,11 @@ async function checkForProject() {
     await cloudAssets.execCommand(`gcloud services enable cloudasset.googleapis.com`);
     const start = new shell_cmd();
     const result = await start.execCommand(
-      `gcloud asset search-all-resources --asset-types="cloudresourcemanager.googleapis.com/Project" --scope=organizations/${process.env.ORG_ID} --format=json`
+      `gcloud beta billing projects list --billing-account=${process.env.SADA_BILLING_ACCOUNT_ID} --format=json`
     );
     const data = JSON.parse(result);
     data.forEach((project) => {
-      projects.push(project.additionalAttributes.projectId);
+      projects.push(project.projectId);
     });
     console.log(projects);
   } catch (error) {
