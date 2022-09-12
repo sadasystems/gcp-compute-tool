@@ -18,7 +18,6 @@ async function checkForProject() {
     data.forEach((project) => {
       projects.push(project.projectId);
     });
-    console.log(projects);
   } catch (error) {
     console.log("**Error querying for projects >>>", error);
     return "Error looking for project";
@@ -26,34 +25,34 @@ async function checkForProject() {
 }
 
 await checkForProject();
+console.log("project", projects);
 
 let finalData = [];
+
 async function getComputeList() {
   try {
-    return Promise.all(
+    return await Promise.all(
       projects.map(async (project) => {
-        console.log("project", project);
+        // console.log("project", project);
         const start = new shell_cmd();
         const result = await start.execCommand(
           `gcloud compute instances list --project ${project} --format=json`
         );
-        const data = JSON.parse(result);
+        const data = await JSON.parse(result);
         // console.log("data", data);
-        if (_.size(data)) {
-          data.forEach(async (instance) => {
-            finalData.push({
-              project: project,
-              name: instance.name,
-              machineType: instance.machineType.split("/").pop(),
-              status: instance.status,
-              zone: instance.zone.split("/").pop(),
-              diskSizeGb: instance.disks.map((object) => object.diskSizeGb),
-              diskType: instance.disks.map((obj) => obj.type),
-            });
+        data.forEach((instance) => {
+          finalData.push({
+            project: project,
+            name: instance.name,
+            machineType: instance.machineType.split("/").pop(),
+            status: instance.status,
+            zone: instance.zone.split("/").pop(),
+            diskSizeGb: instance.disks.map((object) => object.diskSizeGb),
+            diskType: instance.disks.map((obj) => obj.type),
           });
-          console.log(finalData)
-        }
-        return;
+        });
+        console.log(finalData);
+        await parseTOCSV();
       })
     );
   } catch (error) {
@@ -65,36 +64,40 @@ async function getComputeList() {
 await getComputeList();
 console.log(" final data", finalData);
 
-const test = finalData.map(async (obj) => {
-  console.log('entering map', obj);
-  let stuff;
-  await fetch("https://gcpinstances.doit-intl.com/data.json")
-    .then((res) => res.text())
-    .then((text) => {
-      stuff = JSON.parse(text);
-    });
-  const result = stuff[obj.machineType.split("-")[0]][obj.machineType];
-  return {
-    ...obj,
-    cpu: result.specs.cores,
-    memory: result.specs.memory,
+async function parseTOCSV() {
+  const test = finalData.map(async (obj) => {
+    console.log("entering map", obj);
+    let stuff;
+    await fetch("https://gcpinstances.doit-intl.com/data.json")
+      .then((res) => res.text())
+      .then((text) => {
+        stuff = JSON.parse(text);
+      });
+    const result = stuff[obj.machineType.split("-")[0]][obj.machineType];
+    return {
+      ...obj,
+      cpu: result.specs.cores,
+      memory: result.specs.memory,
+    };
+  });
+
+  const results = await Promise.all(test);
+  // console.log(results);
+  const options = {
+    fieldSeparator: ",",
+    quoteStrings: '"',
+    decimalSeparator: ".",
+    showLabels: true,
+    showTitle: true,
+    title: "List of Compute Instances",
+    useTextFile: false,
+    useBom: true,
+    useKeysAsHeaders: true,
   };
-});
+  const csvExporter = new ExportToCsv(options);
 
-const results = await Promise.all(test);
-// console.log(results);
-const options = {
-  fieldSeparator: ",",
-  quoteStrings: '"',
-  decimalSeparator: ".",
-  showLabels: true,
-  showTitle: true,
-  title: "List of Compute Instances",
-  useTextFile: false,
-  useBom: true,
-  useKeysAsHeaders: true,
-};
-const csvExporter = new ExportToCsv(options);
+  const csvData = csvExporter.generateCsv(results, true);
+  fs.writeFileSync("data.csv", csvData);
+}
 
-const csvData = csvExporter.generateCsv(results, true);
-fs.writeFileSync("data.csv", csvData);
+// await parseTOCSV();
