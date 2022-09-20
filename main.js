@@ -31,30 +31,29 @@ let finalData = [];
 
 async function getComputeList() {
   try {
-    return await Promise.all(
-      projects.map(async (project) => {
-        // console.log("project", project);
-        const start = new shell_cmd();
-        const result = await start.execCommand(
-          `gcloud compute instances list --project ${project} --format=json`
-        );
-        const data = await JSON.parse(result);
-        // console.log("data", data);
-        data.forEach((instance) => {
-          finalData.push({
-            project: project,
-            name: instance.name,
-            machineType: instance.machineType.split("/").pop(),
-            status: instance.status,
-            zone: instance.zone.split("/").pop(),
-            diskSizeGb: instance.disks.map((object) => object.diskSizeGb),
-            diskType: instance.disks.map((obj) => obj.type),
-          });
+    const results = projects.map(async (project) => {
+      // console.log("project", project);
+      const start = new shell_cmd();
+      const result = await start.execCommand(
+        `gcloud compute instances list --project ${project} --format=json`
+      );
+      const data = JSON.parse(result);
+      // console.log("data", data);
+      data.forEach((instance) => {
+        finalData.push({
+          project: project,
+          name: instance.name,
+          machineType: instance.machineType.split("/").pop(),
+          status: instance.status,
+          zone: instance.zone.split("/").pop(),
+          diskSizeGb: instance.disks.map((object) => object.diskSizeGb),
+          diskType: instance.disks.map((obj) => obj.type),
         });
-        console.log(finalData);
-        await parseTOCSV();
-      })
-    );
+      });
+      // console.log(finalData);
+      // await parseTOCSV();
+    });
+    return await Promise.all(results);
   } catch (error) {
     console.log("**Error querying for instances >>>", error);
     return "Error looking for instance";
@@ -100,4 +99,4 @@ async function parseTOCSV() {
   fs.writeFileSync("data.csv", csvData);
 }
 
-// await parseTOCSV();
+await parseTOCSV();
