@@ -46,8 +46,8 @@ async function getComputeList() {
           machineType: instance.machineType.split("/").pop(),
           status: instance.status,
           zone: instance.zone.split("/").pop(),
-          diskSizeGb: instance.disks.map((object) => object.diskSizeGb),
-          diskType: instance.disks.map((obj) => obj.type),
+          diskSizeGb: (instance.disks.map((object) => object.diskSizeGb)).toString(),
+          diskType: (instance.disks.map((obj) => obj.type)).toString(),
         });
       });
       // console.log(finalData);
