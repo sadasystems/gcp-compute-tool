@@ -1,5 +1,0 @@
-﻿List of Compute Instances for billing account id 019D75-FC238B-9A528A
-
-project,name,machineType,status,zone,diskSizeGb,diskType,cpu,memory
-"silverlake-data-science-team","darceynotebook","n1-standard-4","RUNNING","us-west1-b","100,100","PERSISTENT,PERSISTENT",4,15
-"silverlake-data-science-team","ds-github","n1-standard-2","TERMINATED","us-west1-b","100,100","PERSISTENT,PERSISTENT",2,7.5
