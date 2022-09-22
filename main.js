@@ -10,11 +10,11 @@ dotenv.config();
 let projects = [];
 async function checkForProject() {
   try {
-    const start = new shell_cmd();
-    const result = await start.execCommand(
+    // const start = new shell_cmd();
+    const { stdout } = await shell_cmd(
       `gcloud beta billing projects list --billing-account=${process.env.SADA_BILLING_ACCOUNT_ID} --format=json`
     );
-    const data = JSON.parse(result);
+    const data = JSON.parse(stdout);
     data.forEach((project) => {
       projects.push(project.projectId);
     });
@@ -33,23 +33,28 @@ async function getComputeList() {
   try {
     const results = projects.map(async (project) => {
       // console.log("project", project);
-      const start = new shell_cmd();
-      const result = await start.execCommand(
-        `gcloud compute instances list --project ${project} --format=json`
-      );
-      const data = JSON.parse(result);
-      // console.log("data", data);
-      data.forEach((instance) => {
-        finalData.push({
-          project: project,
-          name: instance.name,
-          machineType: instance.machineType.split("/").pop(),
-          status: instance.status,
-          zone: instance.zone.split("/").pop(),
-          diskSizeGb: (instance.disks.map((object) => object.diskSizeGb)).toString(),
-          diskType: (instance.disks.map((obj) => obj.type)).toString(),
+      // const start = new shell_cmd();
+      try {
+        const { stdout } = await shell_cmd(
+          `gcloud compute instances list --project ${project} --format=json`
+        );
+        const data = JSON.parse(stdout);
+        // console.log("data", data);
+        data.forEach((instance) => {
+          finalData.push({
+            project: project,
+            name: instance.name,
+            machineType: instance.machineType.split("/").pop(),
+            status: instance.status,
+            zone: instance.zone.split("/").pop(),
+            diskSizeGb: instance.disks.map((object) => object.diskSizeGb).toString(),
+            diskType: instance.disks.map((obj) => obj.type).toString(),
+          });
         });
-      });
+      } catch (error) {
+        console.log(error);
+      }
+
       // console.log(finalData);
       // await parseTOCSV();
     });
@@ -99,5 +104,10 @@ async function parseTOCSV() {
   fs.writeFileSync("data.csv", csvData);
 }
 
-await parseTOCSV();
+if (!_.isEmpty(finalData)) {
+  await parseTOCSV();
+  console.log("success");
+  process.exit(1);
+}
+console.log("Failed");
 process.exit(1);

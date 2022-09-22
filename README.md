@@ -14,7 +14,7 @@ gcloud - [https://cloud.google.com/sdk/docs/install](https://cloud.google.com/sd
 
 nodejs - [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
-Make sure the USER running this script has sufficient permissions at the organization level to search all assets, enable compute instance etc.
+## User needs compute.instances.list permission for each project
 
 #### 1. Clone the repository and navigate to the directory
 ```shell
