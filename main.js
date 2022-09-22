@@ -100,3 +100,4 @@ async function parseTOCSV() {
 }
 
 await parseTOCSV();
+process.exit(1);
