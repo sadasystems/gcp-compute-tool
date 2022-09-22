@@ -1,7 +1,11 @@
-# GCP Compute List Export Tool and migrate to sada billing account id
+# GCP Compute List Export Tool 
 Export your current compute instances to a CSV format in local directory
 
 This script will extract all the projects and compute instances within those projects and export this data to a .csv format in the same directory 
+
+## Demo
+<img width="1177" alt="image" src="https://user-images.githubusercontent.com/63981576/191659756-72ea8ab1-f8cb-429b-9faf-a277d4cca0ed.png">
+
 
 ## Getting Started
 Make sure node and gcloud is installed on your system
@@ -34,7 +38,7 @@ npm install
 
 #### 4. Run Script
 ```shell
-In the .env file, enter the SADA_BILLING_ACCOUNT_ID and (OLD_BILLING_ACCOUNT_ID , if migrating to SADA)
+In the .env file, enter the SADA_BILLING_ACCOUNT_ID (Or any billing id that you want to do analysis on)
 ```
 
 #### 5. Run Script
@@ -42,9 +46,4 @@ In the .env file, enter the SADA_BILLING_ACCOUNT_ID and (OLD_BILLING_ACCOUNT_ID 
 node main.js
 ```
 
-To Migrate projects to billing account 
-
-#### 6. Migrate projects to sada billing account
-```shell
-node migrateProjectsToSada.js
-```
+### It will take 1-2 minutes to process through all the projects (be a little patient! :))
